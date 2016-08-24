@@ -140,7 +140,7 @@ myUtils.getConfig(function (err, config) {
         if (newDefault.sentinel_host) {
           client = new Redis({showFriendlyErrorStack: true , sentinels: [{ host: newDefault.sentinel_host, port: newDefault.sentinel_port}],name: 'mymaster' });
         } else {
-          client = new Redis(newDefault.port, newDefault.host);
+          client = new Redis(newDefault.port, newDefault.host, { password: newDefault.password });
         }
         client.label = newDefault.label;
         redisConnections.push(client);
@@ -176,16 +176,9 @@ myUtils.getConfig(function (err, config) {
 function startDefaultConnections (connections, callback) {
   if (connections) {
     connections.forEach(function (connection) {
-      var client = new Redis(connection.port, connection.host);
+      var client = new Redis(connection.port, connection.host, { password: connection.password });
       client.label = connection.label;
       redisConnections.push(client);
-      if (connection.password) {
-        redisConnections.getLast().auth(connection.password, function (err) {
-          if (err) {
-            return callback(err);
-          }
-        });
-      }
       setUpConnection(redisConnections.getLast(), connection.dbIndex);
     });
   }

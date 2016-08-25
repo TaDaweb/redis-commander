@@ -144,14 +144,6 @@ myUtils.getConfig(function (err, config) {
         }
         client.label = newDefault.label;
         redisConnections.push(client);
-        if (args['redis-password']) {
-          redisConnections.getLast().auth(args['redis-password'], function (err) {
-            if (err) {
-              console.log(err);
-              process.exit();
-            }
-          });
-        }
         config.default_connections.push(newDefault);
         myUtils.saveConfig(config, function (err) {
           if (err) {

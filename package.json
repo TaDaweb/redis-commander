@@ -46,5 +46,8 @@
   "bin": {
     "redis-commander": "./bin/redis-commander.js"
   },
-  "preferGlobal": true
+  "preferGlobal": true,
+  "scripts": {
+    "start": "./bin/redis-commander.js"
+  }
 }

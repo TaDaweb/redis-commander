@@ -6,7 +6,7 @@ FROM node
 RUN mkdir -p /usr/src
 WORKDIR /usr/src
 
-RUN git clone https://github.com/joeferner/redis-commander.git \
+RUN git clone https://github.com/TaDaweb/redis-commander \
 	&& cd redis-commander \
 	&& npm install -g redis-commander
 
